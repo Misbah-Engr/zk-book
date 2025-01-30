@@ -293,7 +293,7 @@ $$
 \begin{bmatrix}  
 3 \\
 12 \\
-\end{bmatrix}\cdot 2=
+\end{bmatrix}\cdot 2+
 \begin{bmatrix}  
 9 \\
 6 \\
