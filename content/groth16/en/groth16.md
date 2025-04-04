@@ -463,7 +463,7 @@ $$\begin{align*}
 [A]_1 &= [\alpha]_1 + \sum_{i=1}^m a_iu_i(\tau)+r[\delta]_1\\
 [B]_1 &= [\beta]_1 + \sum_{i=1}^m a_iv_i(\tau)+s[\delta]_1\\
 [B]_2 &= [\beta]_2 + \sum_{i=1}^m a_iv_i(\tau)+s[\delta]_2\\
-[C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)+[A]_1s+[B]_2r-rs[\delta]_1\\
+[C]_1 &= \sum_{i=\ell+1}^m a_i[\Psi_i]_1 + h(\tau)t(\tau)+[A]_1s+[B]_1r-rs[\delta]_1\\
 \end{align*}$$
 
 The prover publishes $([A]_1, [B]_2, [C]_1, [a_1,...,a_\ell])$.
