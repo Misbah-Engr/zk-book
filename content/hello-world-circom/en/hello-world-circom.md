@@ -1,4 +1,4 @@
-# Hello World Circom ✅ 📸
+# Hello World Circom
 
 ## Introduction
 
