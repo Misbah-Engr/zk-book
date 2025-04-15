@@ -1,4 +1,4 @@
-# 32-Bit Emulation in ZK ✅
+# 32-Bit Emulation in ZK
 
 The default datatype in ZK is the field element, where all arithmetic is done modulo a large prime number. However, most “real” computation is done using 32, 64, or 256-bit numbers depending on the virtual machine or execution environment.
 
