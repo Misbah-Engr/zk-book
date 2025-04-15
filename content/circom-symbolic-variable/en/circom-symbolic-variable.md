@@ -1,4 +1,4 @@
-# Symbolic Variables in Circom ✅
+# Symbolic Variables in Circom
 
 A symbolic variable in Circom is a variable that has been assigned values from a signal.
 
