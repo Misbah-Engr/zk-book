@@ -1,4 +1,4 @@
-# Compute Then Constrain ✅ 📸
+# Compute Then Constrain
 
 "Compute then constrain" is a design pattern in ZK circuits where an algorithm's correct output is first computed without constraints. The correctness of the solution is then verified by enforcing invariants related to the algorithm.
 
@@ -18,11 +18,11 @@ The `<==` operator assigns a value to a signal and creates a constraint. Because
 
 ```jsx
 template InputEqualsZero() {
-	signal input in;
-	signal output out;
-	
-	// out = 1 if in == 0
-	out <== in == 0 ? 1 : 0;
+  signal input in;
+  signal output out;
+  
+  // out = 1 if in == 0
+  out <== in == 0 ? 1 : 0;
 }
 
 component main = InputEqualsZero();
@@ -36,11 +36,11 @@ We need a mechanism to tell Circom “compute and assign the value for this sign
 
 ```jsx
 template InputEqualsZero() {
-	signal input in;
-	signal output out;
-	
-	// out = 1 if in == 0
-	out <-- in == 0 ? 1 : 0;
+  signal input in;
+  signal output out;
+  
+  // out = 1 if in == 0
+  out <-- in == 0 ? 1 : 0;
 }
 
 component main = InputEqualsZero();
@@ -66,17 +66,17 @@ Consider the following code, which proves that `out` is the modular square root 
 
 ```jsx
 function sqrt(n) {
-	// do some magic (see the next code block)
-	return r;
+  // do some magic (see the next code block)
+  return r;
 }
 
 template ValidSqrt() {
-	signal input in;
-	signal output out; // sqrt(in)
-	
-	out <-- sqrt(in);
-	out * out === in; // ensure sqrt was correct
-	// the `*` is implicity done modulo p
+  signal input in;
+  signal output out; // sqrt(in)
+  
+  out <-- sqrt(in);
+  out * out === in; // ensure sqrt was correct
+  // the `*` is implicity done modulo p
 }
 ```
 
@@ -135,14 +135,14 @@ Modular square roots have two solutions: the square root itself and its additive
 
 ```jsx
 template ValidSqrt() {
-	signal input in;
-	signal output out1; // sqrt(in)
-	signal output out2; // -sqrt(in)
-	
-	out1 <-- sqrt(in);
-	out2 <-- out1 * -1; // Computation Step (Unconstrained)
-	out1 * out1 === in; // Verification Step (Constraint-Based):
-	out2 * out2 === in; // Verification Step
+  signal input in;
+  signal output out1; // sqrt(in)
+  signal output out2; // -sqrt(in)
+  
+  out1 <-- sqrt(in);
+  out2 <-- out1 * -1; // Computation Step (Unconstrained)
+  out1 * out1 === in; // Verification Step (Constraint-Based):
+  out2 * out2 === in; // Verification Step
 }
 ```
 
@@ -172,17 +172,17 @@ However, using such a large exponent (Circom's default is $p\approx2^{254}$) wil
 
 ```jsx
 template MulInv() {
-	signal input in;
+  signal input in;
   signal output out;
-	
-	// Fermat's little theorem
-	// compute:
-	// note that -2 = p - 2 mod p
-	var inv = in ** (-2);
-	out <-- inv;
-	
-	// then constrain
-	out * in === 1;
+  
+  // Fermat's little theorem
+  // compute:
+  // note that -2 = p - 2 mod p
+  var inv = in ** (-2);
+  out <-- inv;
+  
+  // then constrain
+  out * in === 1;
 }
 
 component main = MulInv();
@@ -202,14 +202,14 @@ The template above could be written a little more cleanly as:
 
 ```solidity
 template MulInv() {
-	signal input in;
+  signal input in;
   signal output out;
-	
-	// compute
-	out <-- 1 / in;
-	
-	// then constrain
-	out * in === 1;
+  
+  // compute
+  out <-- 1 / in;
+  
+  // then constrain
+  out * in === 1;
 }
 
 component main = MulInv();
@@ -302,15 +302,15 @@ The [IsZero](https://github.com/iden3/circomlib/blob/0a045aec50d51396fcd86a56898
 
 ```jsx
 template IsZero() {
-    signal input in;
-    signal output out;
+  signal input in;
+  signal output out;
 
-    signal inv;
+  signal inv;
 
-    inv <-- in!=0 ? 1/in : 0;
+  inv <-- in!=0 ? 1/in : 0;
 
-    out <== -in*inv +1;
-    in*out === 0;
+  out <== -in*inv +1;
+  in*out === 0;
 }
 ```
 
@@ -326,14 +326,14 @@ The [IsEqual](https://github.com/iden3/circomlib/blob/0a045aec50d51396fcd86a5689
 
 ```solidity
 template IsEqual() {
-    signal input in[2];
-    signal output out;
+  signal input in[2];
+  signal output out;
 
-    component isz = IsZero();
+  component isz = IsZero();
 
-    in[1] - in[0] ==> isz.in;
+  in[1] - in[0] ==> isz.in;
 
-    isz.out ==> out;
+  isz.out ==> out;
 }
 ```
 
@@ -343,19 +343,19 @@ The [Num2Bits](https://github.com/iden3/circomlib/blob/252f8130105a66c8ae8b4a23c
 
 ```jsx
 template Num2Bits(n) {
-    signal input in; // number
-    signal output out[n]; // binary output
-    var lc1=0;
+  signal input in; // number
+  signal output out[n]; // binary output
+  var lc1=0;
 
-    var e2=1;
-    for (var i = 0; i<n; i++) {
-        out[i] <-- (in >> i) & 1;
-        out[i] * (out[i] -1 ) === 0;
-        lc1 += out[i] * e2;
-        e2 = e2+e2;
-    }
+  var e2=1;
+  for (var i = 0; i<n; i++) {
+    out[i] <-- (in >> i) & 1;
+    out[i] * (out[i] -1 ) === 0;
+    lc1 += out[i] * e2;
+    e2 = e2+e2;
+  }
 
-    lc1 === in;
+  lc1 === in;
 }
 ```
 
@@ -386,53 +386,53 @@ To ensure that `out` equals at least one of the items in the list, it sums up an
 ```jsx
 
 template IsMax() {
-	signal input in[3];
-	signal output out;
-	
-	// compute the max as usual
-	var maxx = in[0];
-	for (var i = 1; i < 3; i++) {
-		if (in[i] > maxx) {
-			maxx = in[i];
-		}
-	}
-	
-	// propose the max, but do not constrained it yet
-	out <-- maxx;
-	
-	// max must be ≥ every other element
-	signal gte0;
-	signal gte1;
-	signal gte2;
-	
-	// gte0 <== GreaterEqThan(252)([out, in[0]]);
-	// is shorthand for
-	// component gte0 = GreaterEqThan(252);
-	// gte0[0] <== out;
-	// gte0[1] <== in[0];
-	// 252 is to ensure we don't have enough
-	// bits to encode numbers larger than what
-	// fits in the default finite field, which
-	// would lead to aliasing issues
-	gte0 <== GreaterEqThan(252)([out, in[0]]);
-	gte1 <== GreaterEqThan(252)([out, in[1]]);
-	gte2 <== GreaterEqThan(252)([out, in[2]]);
-	gte0 === 1;
-	gte1 === 1;
-	gte2 === 1;
-	
-	// max must be equal to at least one element
-	signal eq0;
-	signal eq1;
-	signal eq2;
-	eq0 <== IsEqual()([out, in[0]]);
-	eq1 <== IsEqual()([out, in[1]]);
-	eq2 <== IsEqual()([out, in[2]]);
-	
-	signal iz;
-	iz <== IsZero()(eq0 + eq1 + eq2);
-	// if IsZero is 1, we have a violation
-	iz === 0;
+  signal input in[3];
+  signal output out;
+  
+  // compute the max as usual
+  var maxx = in[0];
+  for (var i = 1; i < 3; i++) {
+    if (in[i] > maxx) {
+      maxx = in[i];
+    }
+  }
+  
+  // propose the max, but do not constrained it yet
+  out <-- maxx;
+  
+  // max must be ≥ every other element
+  signal gte0;
+  signal gte1;
+  signal gte2;
+  
+  // gte0 <== GreaterEqThan(252)([out, in[0]]);
+  // is shorthand for
+  // component gte0 = GreaterEqThan(252);
+  // gte0[0] <== out;
+  // gte0[1] <== in[0];
+  // 252 is to ensure we don't have enough
+  // bits to encode numbers larger than what
+  // fits in the default finite field, which
+  // would lead to aliasing issues
+  gte0 <== GreaterEqThan(252)([out, in[0]]);
+  gte1 <== GreaterEqThan(252)([out, in[1]]);
+  gte2 <== GreaterEqThan(252)([out, in[2]]);
+  gte0 === 1;
+  gte1 === 1;
+  gte2 === 1;
+  
+  // max must be equal to at least one element
+  signal eq0;
+  signal eq1;
+  signal eq2;
+  eq0 <== IsEqual()([out, in[0]]);
+  eq1 <== IsEqual()([out, in[1]]);
+  eq2 <== IsEqual()([out, in[2]]);
+  
+  signal iz;
+  iz <== IsZero()(eq0 + eq1 + eq2);
+  // if IsZero is 1, we have a violation
+  iz === 0;
 }
 ```
 
