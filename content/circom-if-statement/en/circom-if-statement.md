@@ -1,4 +1,4 @@
-# Conditional Statements in Circom ✅
+# Conditional Statements in Circom
 
 Circom is very strict with the usage of if-statements. The following rules must be followed:
 
