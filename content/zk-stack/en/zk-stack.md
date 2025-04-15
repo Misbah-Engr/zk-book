@@ -1,4 +1,4 @@
-# Modeling the Stack Data Structure in ZK ✅
+# Modeling the Stack Data Structure in ZK
 
 This tutorial shows how to create a stack in Circom.
 
