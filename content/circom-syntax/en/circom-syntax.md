@@ -1,4 +1,4 @@
-# Circom Template Parameters, Variables, Loops, If Statements, Assert ✅
+# Circom Template Parameters, Variables, Loops, If Statements, Assert
 
 This chapter covers essential syntax, which you'll see in most Circom programs. With Circom, we're able to define a Rank 1 Constraint System (R1CS) using code instead of explicitly defining each constraint. We'll explore those tools in this chapter.
 
