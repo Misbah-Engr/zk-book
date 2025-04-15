@@ -49,8 +49,8 @@ template Example () {
 component main = Example();
 
 /* INPUT = {
-    "a": "9",
-    "b": "10"
+  "a": "9",
+  "b": "10"
 } */
 ```
 
@@ -97,7 +97,7 @@ template DisjointExample1() {
 component main = DisjointExample1();
 
 /* INPUT = {
-    "x": "18"
+  "x": "18"
 } */
 ```
 
@@ -116,10 +116,10 @@ include "circomlib/gates.circom";
 template DisjointExample1() {
   signal input x;
 
-	component or = OR();
+  component or = OR();
   or.a <== LessThan(252)([x, 5]);
   or.b <== GreaterThan(252)([x, 17]);
-	or.out === 1;   
+  or.out === 1;   
 }
 
 component main = DisjointExample1();
@@ -234,10 +234,10 @@ Similarly, the following circuit does not force `x` to be less than 100. The out
 template MissingConstraint2() {
   signal input x;
 
-	component lt = LessThan(252);
-	lt.in[0] <== x;
-	lt.in[1] <== 100;
-		
+  component lt = LessThan(252);
+  lt.in[0] <== x;
+  lt.in[1] <== 100;
+  	
   // x could be ≥ 100 since lt.out is allowed to be 0 or any other arbitrary value
 }
 ```
