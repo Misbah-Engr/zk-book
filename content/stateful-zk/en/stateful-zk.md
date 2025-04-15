@@ -1,4 +1,4 @@
-# Introduction to Stateful Computations in ZK ✅
+# Introduction to Stateful Computations in ZK
 
 When carrying out iterative computations such as powers, factorials, or computing the Fibonacci sequence, we need to “stop the computation” after a certain point. 
 
