@@ -1,4 +1,4 @@
-# Indicate Then Constrain ✅
+# Indicate Then Constrain
 
 If we want to say that “`x` can be equal to 5 or 6” we can simply use the following constraint:
 
@@ -38,12 +38,12 @@ Here is a minimal example of using the LessThan template:
 include "circomlib/comparators.circom";
 
 template Example () {
-    signal input a;
-    signal input b;
-    signal output out;
-    
-    // 252 will be explained in the next section
-    out <== LessThan(252)([a, b]);
+  signal input a;
+  signal input b;
+  signal output out;
+  
+  // 252 will be explained in the next section
+  out <== LessThan(252)([a, b]);
 }
 
 component main = Example();
@@ -79,19 +79,19 @@ include "circomlib/comparators.circom";
 include "circomlib/gates.circom";
 
 template DisjointExample1() {
-    signal input x;
-    
-    signal indicator1;
-    signal indicator2;
+  signal input x;
+  
+  signal indicator1;
+  signal indicator2;
 
-    indicator1 <== LessThan(252)([x, 5]);
-    indicator2 <== GreaterThan(252)([x, 17]);
+  indicator1 <== LessThan(252)([x, 5]);
+  indicator2 <== GreaterThan(252)([x, 17]);
 
-    component or = OR();
-    or.a <== indicator1;
-    or.b <== indicator2;
+  component or = OR();
+  or.a <== indicator1;
+  or.b <== indicator2;
 
-    or.out === 1;
+  or.out === 1;
 }
 
 component main = DisjointExample1();
@@ -114,18 +114,18 @@ include "circomlib/comparators.circom";
 include "circomlib/gates.circom";
 
 template DisjointExample1() {
-    signal input x;
+  signal input x;
 
-		component or = OR();
-    or.a <== LessThan(252)([x, 5]);
-    or.b <== GreaterThan(252)([x, 17]);
-		or.out === 1;   
+	component or = OR();
+  or.a <== LessThan(252)([x, 5]);
+  or.b <== GreaterThan(252)([x, 17]);
+	or.out === 1;   
 }
 
 component main = DisjointExample1();
 
 /* INPUT = {
-    "x": "18"
+  "x": "18"
 } */
 ```
 
@@ -149,20 +149,20 @@ include "circomlib/comparators.circom";
 include "circomlib/gates.circom";
 
 template DisjointExample2() {
-    signal input x;
-    signal input y;
+  signal input x;
+  signal input y;
 
-		component nand = NAND();
-    nand.a <== LessThan(252)([x, 100]);
-    nand.b <== LessThan(252)([y, 100]);
-		nand.out === 1;   
+  component nand = NAND();
+  nand.a <== LessThan(252)([x, 100]);
+  nand.b <== LessThan(252)([y, 100]);
+  nand.out === 1;   
 }
 
 component main = DisjointExample2();
 
 /* INPUT = {
-    "x": "18",
-    "y": "100"
+  "x": "18",
+  "y": "100"
 } */
 ```
 
@@ -179,35 +179,35 @@ include "circomlib/comparators.circom";
 include "circomlib/gates.circom";
 
 template DisjointExample3(n) {
-    signal input k;
-    signal input x;
-    signal input y;
-    signal input z;
-    
-    signal totalGreaterThan;
-    
-    signal greaterThanX;
-    signal greaterThanY;
-    signal greaterThanZ;
-    
-    greaterThanX <== GreaterThan(252)([k, x]);
-    greaterThanY <== GreaterThan(252)([k, y]);
-    greaterThanZ <== GreaterThan(252)([k, z]);
-    
-    totalGreaterThan = greaterThanX + greaterThanY + greaterThanZ;
-    
-    signal atLeastTwo;
-    atLeastTwo <== GreaterEqThan(252)([totalGreaterThan, 2]);
-    atLeastTwo === 1;
+  signal input k;
+  signal input x;
+  signal input y;
+  signal input z;
+  
+  signal totalGreaterThan;
+  
+  signal greaterThanX;
+  signal greaterThanY;
+  signal greaterThanZ;
+  
+  greaterThanX <== GreaterThan(252)([k, x]);
+  greaterThanY <== GreaterThan(252)([k, y]);
+  greaterThanZ <== GreaterThan(252)([k, z]);
+  
+  totalGreaterThan = greaterThanX + greaterThanY + greaterThanZ;
+  
+  signal atLeastTwo;
+  atLeastTwo <== GreaterEqThan(252)([totalGreaterThan, 2]);
+  atLeastTwo === 1;
 }
 
 component main = DisjointExample3();
 
 /* INPUT = {
-		"k": 20
-    "x": 18,
-    "y": 100,
-    "z": 10
+  "k": 20
+  "x": 18,
+  "y": 100,
+  "z": 10
 } */
 ```
 
@@ -217,14 +217,14 @@ Sometimes, developers may forget to constrain the output of components, **which 
 
 ```jsx
 template MissingConstraint1() {
-    signal input x;
-    signal input y;
+  signal input x;
+  signal input y;
 
-		component and = AND();
-    and.a <== x;
-    and.b <== y;
-    
-    // and.out is not constrained, so x and y can have any values!
+  component and = AND();
+  and.a <== x;
+  and.b <== y;
+  
+  // and.out is not constrained, so x and y can have any values!
 }
 ```
 
@@ -232,12 +232,12 @@ Similarly, the following circuit does not force `x` to be less than 100. The out
 
 ```jsx
 template MissingConstraint2() {
-    signal input x;
+  signal input x;
 
-		component lt = LessThan(252);
-		lt.in[0] <== x;
-		lt.in[1] <== 100;
+	component lt = LessThan(252);
+	lt.in[0] <== x;
+	lt.in[1] <== 100;
 		
-		// x could be ≥ 100 since lt.out is allowed to be 0 or any other arbitrary value
+  // x could be ≥ 100 since lt.out is allowed to be 0 or any other arbitrary value
 }
 ```
