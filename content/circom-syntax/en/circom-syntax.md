@@ -8,11 +8,11 @@ Previously, we looked at a circuit (`IsBinary`) that verified whether the suppli
 
 ```jsx
 template IsBinary() {
-  
-    signal input in[2];
-    
-    in[0] * (in[0] - 1) === 0;
-    in[1] * (in[1] - 1) === 0;
+
+  signal input in[2];
+
+  in[0] * (in[0] - 1) === 0;
+  in[1] * (in[1] - 1) === 0;
 }
 
 component main = IsBinary();
@@ -25,13 +25,13 @@ Therefore, Circom allows us to constrain an arbitrary number of signals using th
 ```jsx
 template IsBinary(n) {
 
-    // array of n inputs
-    signal input in[n];
+  // array of n inputs
+  signal input in[n];
     
-    // n loops: n constraints
-    for (var i = 0; i < n; i++) {
-        in[i] * (in[i] - 1) === 0;
-    }
+  // n loops: n constraints
+  for (var i = 0; i < n; i++) {
+    in[i] * (in[i] - 1) === 0;
+  }
 }
 
 // instantiated w/ 4 inputs & 4 constraints
@@ -61,13 +61,13 @@ We now explain the `for` loop introduced above.
 ```jsx
 template IsBinary(n) {
 
-    // array of n inputs
-    signal input in[n];
+  // array of n inputs
+  signal input in[n];
     
-    // n loops: n constraints
-    for (var i = 0; i < n; i++) {
-        in[i] * (in[i] - 1) === 0;
-    }
+  // n loops: n constraints
+  for (var i = 0; i < n; i++) {
+    in[i] * (in[i] - 1) === 0;
+  }
 }
 
 // instantiated with 4 inputs & 4 constraints
