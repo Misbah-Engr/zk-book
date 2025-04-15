@@ -1,4 +1,4 @@
-# Public and Private Inputs ✅
+# Public and Private Inputs
 
 A public input in Circom is a signal in the witness that will be revealed to the verifier.
 
@@ -8,11 +8,11 @@ The following circuit claims, “I multiplied two numbers together and got a thi
 
 ```jsx
 template Main() {
-	signal input a;
-	signal input b;
-	signal input c;
-	
-	a * b === c;
+  signal input a;
+  signal input b;
+  signal input c;
+  
+  a * b === c;
 }
 
 component main = Main();
@@ -22,11 +22,11 @@ This next circuit makes a similar claim, but with the change that the result is 
 
 ```jsx
 template Main() {
-	signal input a;
-	signal input b;
-	signal input c;
-	
-	a * b === c;
+  signal input a;
+  signal input b;
+  signal input c;
+  
+  a * b === c;
 }
 
 component main {public [c]} = Main();
@@ -40,11 +40,11 @@ The template above compiles to a Rank-1 Constraint System (R1CS) identical to th
 
 ```jsx
 template Main() {
-	signal input a;
-	signal input b;
-	signal output c;
-	
-	a * b ==> c;
+  signal input a;
+  signal input b;
+  signal output c;
+  
+  a * b ==> c;
 }
 
 component main = Main();
@@ -62,13 +62,13 @@ In the case of inputs, if we want to make some public, then that means we have a
 
 ```jsx
 template Main() {
-	signal input a; // explicitly public
-	signal input b;
-	signal input c;
-	signal output d; // implicitly public
-	
-	signal s <== a * b; // intermediate signal
-	d <== c * s;
+  signal input a; // explicitly public
+  signal input b;
+  signal input c;
+  signal output d; // implicitly public
+  
+  signal s <== a * b; // intermediate signal
+  d <== c * s;
 }
 
 component main{public [a]} = Main();
@@ -100,16 +100,15 @@ Let’s use “I multiplied hidden values `a`, `b`, with a public value `c` toge
 ```jsx
 // assert that a*b === c*d
 template Example() {
-	signal input a;
-	signal input b;
-	signal input c;
-	signal input d;
-	
-	signal s;
-	
-	s <== a * b;
-	d === s * c;
-	
+  signal input a;
+  signal input b;
+  signal input c;
+  signal input d;
+  
+  signal s;
+  
+  s <== a * b;
+  d === s * c;
 }
 
 component main {public [c, d]} = Example();
