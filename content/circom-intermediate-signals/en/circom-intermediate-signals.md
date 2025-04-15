@@ -1,4 +1,4 @@
-# Intermediate Signals and Sub-Components ✅
+# Intermediate Signals and Sub-Component
 
 Circom’s primary purpose is to compile down to a Rank 1 Constraint System (R1CS), but its secondary purpose is to populate the witness.
 
@@ -271,20 +271,20 @@ The [circomlib library](https://github.com/iden3/circomlib) is a library of Circ
 
 ```jsx
 template Bits2Num(n) {
-    signal input in[n];
-    signal output out;
+  signal input in[n];
+  signal output out;
     
-    // lc is short for "linear combination"
-    // it serves as an accumulator variable
-    var lc1=0;
+  // lc is short for "linear combination"
+  // it serves as an accumulator variable
+  var lc1=0;
 
-    var e2 = 1;
-    for (var i = 0; i<n; i++) {
-        lc1 += in[i] * e2;
-        e2 += e2 + e2; // could also be e2 *= 2;
-    }
+  var e2 = 1;
+  for (var i = 0; i<n; i++) {
+    lc1 += in[i] * e2;
+    e2 += e2 + e2; // could also be e2 *= 2;
+  }
 
-    lc1 ==> out;
+  lc1 ==> out;
 }
 ```
 
@@ -323,21 +323,21 @@ Rather than assign the input signals to a component separately, it is possible t
 
 ```jsx
 template Mul() {
-    signal input in[2];
-    signal output out;
+  signal input in[2];
+  signal output out;
 
-    out <== in[0] * in[1];
+  out <== in[0] * in[1];
 }
 
 template Example() {
 
-    signal input a;
-    signal input b;
+  signal input a;
+  signal input b;
 
-    signal output out;
+  signal output out;
 
-    // one line instantiation
-    out <== Mul()([a, b]);
+  // one line instantiation
+  out <== Mul()([a, b]);
 }
 
 component main = Example();
