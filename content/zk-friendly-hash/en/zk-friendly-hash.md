@@ -1,4 +1,4 @@
-# ZK Friendly Hash Functions ✅
+# ZK Friendly Hash Functions
 
 ZK-friendly hash functions are hash functions that require much fewer constraints to prove and verify than traditional cryptographic hash functions.
 
