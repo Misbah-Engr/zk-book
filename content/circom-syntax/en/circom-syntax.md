@@ -8,11 +8,11 @@ Previously, we looked at a circuit (`IsBinary`) that verified whether the suppli
 
 ```jsx
 template IsBinary() {
-	
-		signal input in[2];
-		
-		in[0] * (in[0] - 1) === 0;
-		in[1] * (in[1] - 1) === 0;
+  
+    signal input in[2];
+    
+    in[0] * (in[0] - 1) === 0;
+    in[1] * (in[1] - 1) === 0;
 }
 
 component main = IsBinary();
@@ -25,13 +25,13 @@ Therefore, Circom allows us to constrain an arbitrary number of signals using th
 ```jsx
 template IsBinary(n) {
 
-		// array of n inputs
-		signal input in[n];
-		
-		// n loops: n constraints
-		for (var i = 0; i < n; i++) {
-				in[i] * (in[i] - 1) === 0;
-		}
+    // array of n inputs
+    signal input in[n];
+    
+    // n loops: n constraints
+    for (var i = 0; i < n; i++) {
+        in[i] * (in[i] - 1) === 0;
+    }
 }
 
 // instantiated w/ 4 inputs & 4 constraints
@@ -61,13 +61,13 @@ We now explain the `for` loop introduced above.
 ```jsx
 template IsBinary(n) {
 
-		// array of n inputs
-		signal input in[n];
-		
-		// n loops: n constraints
-		for (var i = 0; i < n; i++) {
-				in[i] * (in[i] - 1) === 0;
-		}
+    // array of n inputs
+    signal input in[n];
+    
+    // n loops: n constraints
+    for (var i = 0; i < n; i++) {
+        in[i] * (in[i] - 1) === 0;
+    }
 }
 
 // instantiated with 4 inputs & 4 constraints
@@ -91,8 +91,8 @@ Variables hold non-signal data and are mutable. Here is an example of a variable
 
 ```jsx
 template VariableExample(n) {
-	var acc = 2;
-	signal s;
+  var acc = 2;
+  signal s;
 }
 ```
 
@@ -113,15 +113,15 @@ Suppose we have two arrays. We could use the following template to generate cons
 
 ```jsx
 template EqualOnEven(n) {
-	signal input in1[n];
-	signal input in2[n];
-	
-	for (var i = 0; i < n; i++) {
-		if (i % 2 == 0) {
-			in1[i] === in2[i];
-		}
-		// otherwise no constraint is generated
-	}
+  signal input in1[n];
+  signal input in2[n];
+  
+  for (var i = 0; i < n; i++) {
+    if (i % 2 == 0) {
+      in1[i] === in2[i];
+    }
+    // otherwise no constraint is generated
+  }
 }
 ```
 
@@ -133,15 +133,15 @@ The following code is not allowed because signal `a` is used as the conditional 
 
 ```jsx
 template IfStatementViolation() {
-	signal input a;
-	signal input b;
-	
-	if (a == 2) {
-		b === 3;
-	}
-	else {
-		b === 4;
-	}
+  signal input a;
+  signal input b;
+  
+  if (a == 2) {
+    b === 3;
+  }
+  else {
+    b === 4;
+  }
 }
 ```
 
@@ -155,24 +155,24 @@ Variables can be used as part of constraints. In the example below, we enforce t
 
 ```jsx
 template IsFib(n) {
-	assert(n > 1);
-	
-	signal input in[n];
-	
-	// generate the Fibonacci sequence
-	var correctFibo[n];
-	correctFibo[0] = 0;
-	correctFibo[1] = 1;
+  assert(n > 1);
+  
+  signal input in[n];
+  
+  // generate the Fibonacci sequence
+  var correctFibo[n];
+  correctFibo[0] = 0;
+  correctFibo[1] = 1;
 
-	for (var i = 2; i < n; i++) {
-		correctFibo[i] = correctFibo[i - 1] + correctFibo[i - 2];
-	}
-	
+  for (var i = 2; i < n; i++) {
+    correctFibo[i] = correctFibo[i - 1] + correctFibo[i - 2];
+  }
+  
 
-	// assert that the input is a Fibonacci sequence
-	for (var i = 0; i < n; i++) {
-		in[i] === correctFibo[i];
-	}
+  // assert that the input is a Fibonacci sequence
+  for (var i = 0; i < n; i++) {
+    in[i] === correctFibo[i];
+  }
 }
 ```
 
@@ -187,14 +187,14 @@ Instead, we can use variables to assign a name to a magic number to improve read
 
 ```jsx
 template Equality() {
-	signal input in[2];
-	
-	var left = 0;
-	var right = 1;
-	
-	// require the inputs
-	// to be equal
-	in[left] === in[right];
+  signal input in[2];
+  
+  var left = 0;
+  var right = 1;
+  
+  // require the inputs
+  // to be equal
+  in[left] === in[right];
 }
 ```
 
@@ -206,12 +206,12 @@ For example, if `in1[] = [3,5,6]` then it must be the case that `in2[] = [0,5,12
 
 ```jsx
 template IsIndexMultiplied(n) {
-	signal input in1[n];
-	signal input in2[n];
-	
-	for (var i = 0; i < n; i++) {
-		in1[i] * i === in2[i];
-	}
+  signal input in1[n];
+  signal input in2[n];
+  
+  for (var i = 0; i < n; i++) {
+    in1[i] * i === in2[i];
+  }
 }
 
 component main = IsIndexMultiplied(3);
