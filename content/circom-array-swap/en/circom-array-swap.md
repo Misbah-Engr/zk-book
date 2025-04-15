@@ -1,4 +1,4 @@
-# Swapping Two Items in an Array in Circom ✅
+# Swapping Two Items in an Array in Circom
 
 This chapter shows how to swap two signals in a list of signals. This is an important subroutine for a sorting algorithm. More generally, lists are a fundamental building block for more interesting functions like hash functions or modeling memory in a CPU, so we must learn how to update their values.
 
