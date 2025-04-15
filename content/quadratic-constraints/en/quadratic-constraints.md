@@ -1,4 +1,4 @@
-# Quadratic Constraints ✅
+# Quadratic Constraints
 
 ## Circom Constraints
 
