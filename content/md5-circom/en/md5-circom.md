@@ -1,4 +1,4 @@
-# MD5 Hash In Circom ✅
+# MD5 Hash In Circom
 
 In this tutorial, we will implement the MD5 hash in Circom both to compute the hash and to constrain in Circom that it was computed correctly.
 
