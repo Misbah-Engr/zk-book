@@ -167,7 +167,7 @@ $$=\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \box
 
 Now we can introduce an "expanded" QAP with the following definition:
 
-$$(\theta+\sum_{i=1}^m u_i(x))(\eta +\sum_{i=1}^m v_i(x)) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
+$$(\theta+\sum_{i=1}^m a_iu_i(x))(\eta +\sum_{i=1}^m a_iv_i(x)) =\theta\eta + \theta\sum_{i=1}^m a_iv_i(x) + \eta\sum_{i=1}^m a_iu_i(x) + \sum_{i=1}^m a_iw_i(x) + h(x)t(x)$$
 
 As a sneak peak to where we are going, if we replace $\theta$ with $[\alpha]_1$ and $\eta$ with $[\beta]_2$, we get updated verification formula from earlier:
 
