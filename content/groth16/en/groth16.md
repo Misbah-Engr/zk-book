@@ -51,7 +51,7 @@ $$
 or for $\mathbb{G}_2$ srs:
 
 $$
-f(\tau) = \sum_{i=1}^d f_i\Theta_i=\langle[f_d, f_{d-1},...,f_1,f_0],[\Theta_d,\Theta_{d-1},...,G_1]\rangle
+f(\tau) = \sum_{i=1}^d f_i\Theta_i=\langle[f_d, f_{d-1},...,f_1,f_0],[\Theta_d,\Theta_{d-1},...,G_2]\rangle
 $$
 
 $f(\tau)$ is shorthand for the above expression, and produces an elliptic curve point. It does not mean the prover knows $\tau$.
